@@ -1,0 +1,10 @@
+name: bd4964
+dependencies:
+  - pip
+  - pandas
+  - pyarrow
+  - pytables
+  - ipykernel
+  - pip:
+    - polars
+    - plotnine
