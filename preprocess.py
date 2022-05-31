@@ -1,8 +1,9 @@
 import polars as pl
 import os
 
-from address_augm import augment_address
-from cafe_augm import augment_cafes
+from augm_address import augment_address
+from augm_cafe import augment_cafes
+from augm_violation import augment_violation
 
 def preprocess(path = './input/2022.csv'):
 
@@ -22,6 +23,8 @@ def preprocess(path = './input/2022.csv'):
   df = augment_address(df)
   
   df = augment_cafes(df)
+
+  df = augment_violation(df)
 
   print(df.head())
 
