@@ -1,7 +1,8 @@
 import polars as pl
 import os
 
-from address_augmentation import address_augment
+from address_augm import augment_address
+from cafe_augm import augment_cafes
 
 def preprocess(path = './input/2022.csv'):
 
@@ -18,7 +19,9 @@ def preprocess(path = './input/2022.csv'):
     pl.col('Law Section').cast(pl.Utf8).cast(pl.Categorical),
   ])
 
-  df = address_augment(df)
+  df = augment_address(df)
+  
+  df = augment_cafes(df)
 
   print(df.head())
 
@@ -27,8 +30,7 @@ def preprocess(path = './input/2022.csv'):
   out_file = f'./data/{filename}.gz.parquet'
   df.write_parquet(out_file, compression="gzip")
 
-  size = os.stat(out_file).st_size
-  print(f'done. out size: {size / 1024 / 1024:.2f}')
+  print(f'done: {out_file} {os.stat(out_file).st_size / 1024 / 1024:.2f}MB')
 
 if __name__ == "__main__":
   preprocess()

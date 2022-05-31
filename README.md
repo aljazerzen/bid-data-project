@@ -20,3 +20,9 @@ https://www.visualcrossing.com/weather/weather-data-services
 
 https://data.cityofnewyork.us/City-Government/NYC-Address-Points/g6pj-hd8k
 https://data.cityofnewyork.us/City-Government/Property-Address-Directory/bc8t-ecyu
+
+1 = Manhattan
+2 = The Bronx
+3 = Brooklyn
+4 = Queens
+5 = Staten Island

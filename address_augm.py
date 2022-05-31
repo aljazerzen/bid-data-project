@@ -1,7 +1,7 @@
 # %%
 import polars as pl
 
-def address_augment(df: pl.DataFrame):
+def augment_address(df: pl.DataFrame):
   # %%
   bobaadr = pl.read_parquet('./data/bobaadr.parquet')
 
