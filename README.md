@@ -17,3 +17,6 @@ To allow both local and HPC execution, this is the folder structure:
 ## Data sources
 
 https://www.visualcrossing.com/weather/weather-data-services
+
+https://data.cityofnewyork.us/City-Government/NYC-Address-Points/g6pj-hd8k
+https://data.cityofnewyork.us/City-Government/Property-Address-Directory/bc8t-ecyu
