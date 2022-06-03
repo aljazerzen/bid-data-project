@@ -25,6 +25,8 @@ def preprocess(path = './input/2022.csv'):
   df = augment_cafes(df)
 
   df = augment_violation(df)
+  
+  df = augment_car_color(df)
 
   print(df.head())
 
