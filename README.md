@@ -24,25 +24,31 @@ Weather data:
 
 Primary and high schools:
 
-- https://data.cityofnewyork.us/Education/2013-2014-School-Locations/ac4n-c5re
+- https://data.cityofnewyork.us/Education/2013-2014-School-Locations/ac4n-c5re 
 
-- https://data.cityofnewyork.us/Education/2014-2015-School-Locations/fxs2-faah
+- https://data.cityofnewyork.us/Education/2014-2015-School-Locations/fxs2-faah 
 
-- https://data.cityofnewyork.us/Education/2015-2016-School-Locations/i4ni-6qin
+- https://data.cityofnewyork.us/Education/2015-2016-School-Locations/i4ni-6qin 
 
-- https://data.cityofnewyork.us/Education/2016-2017-School-Locations/ahjc-fdu3
+- https://data.cityofnewyork.us/Education/2016-2017-School-Locations/ahjc-fdu3 
 
-- https://data.cityofnewyork.us/Education/2017-2018-School-Locations/p6h4-mpyy
+- https://data.cityofnewyork.us/Education/2017-2018-School-Locations/p6h4-mpyy 
 
-- https://data.cityofnewyork.us/Education/2018-2019-School-Locations/9ck8-hj3u
+- https://data.cityofnewyork.us/Education/2018-2019-School-Locations/9ck8-hj3u 
 
-- https://data.cityofnewyork.us/Education/2019-2020-School-Locations/wg9x-4ke6
+- https://data.cityofnewyork.us/Education/2019-2020-School-Locations/wg9x-4ke6 
 
-Lat and Long or primary address line.
+TODO:
+
+- Decide whenever we want to attach the given school location years to tickets (match the years) or use 2019-2020 for all (recommend the latter, so we can fill up 2020+ data, there should be minimal error as schools are rarely added and it is easier)
+
+- Decide which columns to add to our data (which information we'd like to use)
+
+- Currently uses pandas and not polars. Need this to calculate distance matrix for lat&long
 
 Events:
 
-- https://data.cityofnewyork.us/City-Government/NYC-Permitted-Event-Information/tvpp-9vvx (https://data.cityofnewyork.us/City-Government/NYC-Permitted-Event-Information/qkez-i8mv). Connect through either only Borough or Event Location -> Lat Long
+- https://data.cityofnewyork.us/City-Government/NYC-Permitted-Event-Information/tvpp-9vvx ( https://data.cityofnewyork.us/City-Government/NYC-Permitted-Event-Information/qkez-i8mv ). Connect through either only Borough or Event Location -> Lat Long
 
 Buisnesses:
 
