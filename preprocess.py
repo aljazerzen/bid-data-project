@@ -4,6 +4,9 @@ import os
 from augm_address import augment_address
 from augm_cafe import augment_cafes
 from augm_violation import augment_violation
+from augm_car_color import augment_car_color
+from augm_ticket_datetime import augment_ticket_datetime
+from augm_school import augment_school
 
 def preprocess(path = './input/2022.csv'):
 
@@ -27,7 +30,7 @@ def preprocess(path = './input/2022.csv'):
   df = augment_violation(df)
   
   df = augment_car_color(df)
-  
+
   df = augment_ticket_datetime(df)
   
   df = augment_school(df)

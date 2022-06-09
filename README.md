@@ -60,6 +60,9 @@ Attractions:
 
 - https://data.cityofnewyork.us/City-Government/Parks-Zones/4j29-i5ry (Boroughs)
 
+## Problems
+
+- Inaccurate datetime (outside of reported year) and inconsistent formatting
 
 
 https://data.cityofnewyork.us/City-Government/NYC-Address-Points/g6pj-hd8k

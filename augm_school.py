@@ -5,10 +5,10 @@ from scipy.spatial.distance import cdist
 
 def augment_school(df: pl.DataFrame):
     # Read school data
-    dfschool = pd.read_csv('School/2019_2020_School.csv')
-	# Convert to pandas
-	dff = pd.DataFrame(df).transpose()
-	dff.columns = df.columns
+    dfschool = pd.read_csv('data/School/2019_2020_School.csv')
+    # Convert to pandas
+    dff = pd.DataFrame(df).transpose()
+    dff.columns = df.columns
     
     # Create distance matrix (fillna(0) should make the NaNs irelevant)
     ## Change dfschool[["LONGITUDE","LATITUDE"]] whenever different column names!!
@@ -17,8 +17,6 @@ def augment_school(df: pl.DataFrame):
     # Put data into original data (Add more columns if needed!)
     dff["Closest_school"] = pd.Series([dfschool["location_code"].iloc[np.argmin(x)] for x in dist_matrix])
     
-	# Convert back to polars
+    # Convert back to polars
     return pl.DataFrame(dff)
     
-
-
