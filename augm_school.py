@@ -15,7 +15,8 @@ def augment_school(df: pl.DataFrame):
     dist_matrix = cdist(dff[["lng", "lat"]].fillna(0), dfschool[["LONGITUDE","LATITUDE"]].fillna(0))
     
     # Put data into original data (Add more columns if needed!)
-    dff["Closest_school"] = pd.Series([dfschool["location_code"].iloc[np.argmin(x)] for x in dist_matrix])
+    dff["Closest_school_code"] = pd.Series([dfschool["location_code"].iloc[np.argmin(x)] for x in dist_matrix])
+    dff["Closest_school_name"] = pd.Series([dfschool["location_name"].iloc[np.argmin(x)] for x in dist_matrix])
     
     # Convert back to polars
     return pl.DataFrame(dff)
