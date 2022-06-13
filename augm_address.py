@@ -37,7 +37,7 @@ def augment_address(df: pl.DataFrame):
       pl.col('the_geom').str.slice(7).str.replace(' .*', '').cast(pl.Float64).alias('lng'),
       pl.col('the_geom').str.replace('.* ', '').str.replace('\)', '').cast(pl.Float64).alias('lat'),
     ])
-    .select(['BIN', 'PHYSICALID', 'BOROCODE', 'lng', 'lat'])
+    .select(['BIN', 'PHYSICALID', 'FULL_STREE', 'BOROCODE', 'lng', 'lat'])
   )
 
   # %%
@@ -46,6 +46,6 @@ def augment_address(df: pl.DataFrame):
     .drop(['BIN', 'PHYSICALID'])
   )
 
-  return df
+  return df.rename({"FULL_STREE": "NEW Street name"})
 
 
