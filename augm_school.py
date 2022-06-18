@@ -3,21 +3,33 @@ import polars as pl
 import numpy as np
 from scipy.spatial.distance import cdist
 
+from dask.distributed import Client
+import dask.dataframe as dd
+client = Client(address="tcp://127.0.0.1:37781")
+print(client)
+
 def augment_school(df: pl.DataFrame):
+
     # Read school data
     dfschool = pd.read_csv('data/School/2019_2020_School.csv')
-    # Convert to pandas
-    dff = pd.DataFrame(df).transpose()
-    dff.columns = df.columns
-    
-    # Create distance matrix (fillna(0) should make the NaNs irelevant)
-    ## Change dfschool[["LONGITUDE","LATITUDE"]] whenever different column names!!
-    dist_matrix = cdist(dff[["lng", "lat"]].fillna(0), dfschool[["LONGITUDE","LATITUDE"]].fillna(0))
-    
-    # Put data into original data (Add more columns if needed!)
-    dff["Closest_school_code"] = pd.Series([dfschool["location_code"].iloc[np.argmin(x)] for x in dist_matrix])
-    dff["Closest_school_name"] = pd.Series([dfschool["location_name"].iloc[np.argmin(x)] for x in dist_matrix])
-    
-    # Convert back to polars
-    return pl.DataFrame(dff)
-    
+    dfschool_loc = dfschool[["LONGITUDE","LATITUDE"]].fillna(0)
+
+    def augment_chunk(df: pd.DataFrame):
+        
+        # Create distance matrix (fillna(0) should make the NaNs irelevant)
+        dist_matrix = cdist(df[["lng", "lat"]].fillna(0), dfschool_loc)
+        
+        # Put data into original data (Add more columns if needed!)
+        arg_min = np.argmin(dist_matrix, axis=1)
+        closest_schools = dfschool.iloc[arg_min].reset_index()
+        df = (df
+            .reset_index()
+            .assign(Closest_school_dist = np.min(dist_matrix, axis=1),)
+            .assign(Closest_school_code = closest_schools.location_code)
+            .assign(Closest_school_name = closest_schools.location_name)
+        )
+        return df
+
+    ddf = dd.from_pandas(df.to_pandas(), chunksize=10000)
+    res = ddf.map_partitions(augment_chunk).compute()
+    return pl.from_pandas(res)

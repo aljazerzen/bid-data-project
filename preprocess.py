@@ -13,7 +13,7 @@ def preprocess(path = './input/2022.csv'):
   filename = os.path.basename(path)
   filename = filename[:filename.rfind('.')]
 
-  df = pl.read_csv(path, rechunk=False, ignore_errors=True, )
+  df = pl.read_csv(path, rechunk=False, ignore_errors=True)
 
   df = df.with_columns([
     pl.col('Vehicle Body Type').cast(pl.Categorical),
@@ -23,21 +23,41 @@ def preprocess(path = './input/2022.csv'):
     pl.col('Law Section').cast(pl.Utf8).cast(pl.Categorical),
   ])
 
+  print('augment_address')
   df = augment_address(df)
   
+  print('augment_cafes')
   df = augment_cafes(df)
 
+  print('augment_violation')
   df = augment_violation(df)
   
+  print('augment_car_color')
   df = augment_car_color(df)
 
+  print('augment_ticket_datetime')
   df = augment_ticket_datetime(df)
   
+  df = df.select([
+    'Vehicle Body Type',
+    'Vehicle Make',
+    'Vehicle Year',
+    'zipcode',
+    'Borough Code',
+    'NEW Street name',
+    'BOROCODE',
+    'lng',
+    'lat',
+    'cafe_count',
+    'Violation Price',
+    'Vehicle Color',
+    'time_of_ticket',
+  ])
+
+  print('augment_school')
   df = augment_school(df)
 
   print(df.head())
-
-  # TODO select only columns we need
 
   out_file = f'./data/{filename}.gz.parquet'
   df.write_parquet(out_file, compression="gzip")
