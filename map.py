@@ -20,9 +20,10 @@ boroughs = boroughs[pick]
 
 p = (pn.ggplot(df.head(100000).to_pandas())
   + pn.geom_map(boroughs, fill='gray', color=None)
-  + pn.geom_point(pn.aes("lng", "lat"), alpha=0.05, size=0.02)
+  + pn.geom_point(pn.aes("lng", "lat"), alpha=0.1, size=0.04, color="blue")
   # + pn.stat_density_2d(pn.aes("lng", "lat", alpha=pn.after_stat('density')), geom='tile', contour=False)
   + pn.coord_fixed()
+  + pn.theme(axis_title_x=pn.element_blank(), axis_title_y=pn.element_blank())
 )
-p.save('figures/nyc.map.pdf')
+p.save('./report/figures/nyc.map.png', width=10, height=10)
 p
