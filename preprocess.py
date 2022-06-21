@@ -53,6 +53,7 @@ def preprocess(path = './input/2022.csv'):
     'Vehicle Color',
     'time_of_ticket',
   ])
+  df = df.rename({'NEW Street name' : 'Street name'})
 
   print('augment_school')
   df = augment_school(df)

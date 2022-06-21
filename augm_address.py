@@ -29,7 +29,7 @@ def augment_address(df: pl.DataFrame):
 
 
   # %%
-  ap = pl.read_csv('data/Address_Point.csv', ignore_errors=True)
+  ap = pl.read_parquet('data/address_point.parquet', ignore_errors=True)
 
   # %%
   ap = (ap
