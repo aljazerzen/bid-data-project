@@ -5,7 +5,7 @@ from scipy.spatial.distance import cdist
 
 from dask.distributed import Client
 import dask.dataframe as dd
-client = Client(address="tcp://127.0.0.1:37781")
+client = Client()
 print(client)
 
 def augment_school(df: pl.DataFrame):

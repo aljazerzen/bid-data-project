@@ -6,12 +6,14 @@ from augm_cafe import augment_cafes
 from augm_violation import augment_violation
 from augm_car_color import augment_car_color
 from augm_ticket_datetime import augment_ticket_datetime
+from augm_weather import augment_weather
 from augm_school import augment_school
 
 def preprocess(path = './input/2022.csv'):
 
   filename = os.path.basename(path)
   filename = filename[:filename.rfind('.')]
+  year = int(path.split('/')[-1].split('.')[0])
 
   df = pl.read_csv(path, rechunk=False, ignore_errors=True)
 
@@ -36,8 +38,12 @@ def preprocess(path = './input/2022.csv'):
   df = augment_car_color(df)
 
   print('augment_ticket_datetime')
-  df = augment_ticket_datetime(df)
-  
+  df = augment_ticket_datetime(df, year)
+
+  print('augment_weather')
+  df = augment_weather(df, year)
+
+
   df = df.select([
     'Vehicle Body Type',
     'Vehicle Make',
@@ -52,6 +58,11 @@ def preprocess(path = './input/2022.csv'):
     'Violation Price',
     'Vehicle Color',
     'time_of_ticket',
+    'temp', 
+    'humidity', 
+    'snowdepth', 
+    'windspeed', 
+    'description',
   ])
   df = df.rename({'NEW Street name' : 'Street name'})
 
